@@ -1,0 +1,19 @@
+version: '2'
+services:
+  jaeger:
+    image: 'jaegertracing/all-in-one:latest'
+    ports:
+      - '5775:5775/udp'
+      - '6831:6831/udp'
+      - '6832:6832/udp'
+      - '5778:5778'
+      - '16686:16686'
+      - '14268:14268'
+    mem_limit: 629145600
+  reverseproxy:
+    image: 'reverseproxy:latest'
+    ports:
+      - '8080:8080'
+    links:
+      - jaeger
+    mem_limit: 314572800
